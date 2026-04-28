@@ -1,0 +1,75 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+class kuferek {
+private:
+    bool zamkniety;
+    int kamyki, muszelki;
+
+public:
+    kuferek() {
+        zamkniety = true;
+        kamyki = 0;
+        muszelki = 0;
+    }
+
+    void otworz() {
+        zamkniety = false;
+        cout << "otwarto\n";
+    }
+
+    void zamknij() {
+        zamkniety = true;
+        cout << "zamknieto\n";
+    }
+
+    void dodaj(int ile_kam, int ile_musz) {
+        if (zamkniety) {
+            cout << "kuferek jest zamkniety\n";
+        } else {
+            kamyki += ile_kam;
+            muszelki += ile_musz;
+            cout << "dodano\n";
+        }
+    }
+
+    void wyswietl() {
+        if (zamkniety) {
+            cout << "kuferek jest zamkniety\n";
+        } else {
+            cout << "w kuferku jest " << kamyki << " kamykow i " << muszelki << " muszelek\n";
+        }
+    }
+};
+
+int main() {
+    kuferek moj;
+    int wybor;
+
+    do {
+        cout << "\n1-otworz 2-zamknij 3-dodaj 4-wyswietl 0-koniec\n";
+        cin >> wybor;
+
+        if (wybor == 1) {
+            moj.otworz();
+        }
+        if (wybor == 2) {
+            moj.zamknij();
+        }
+        if (wybor == 3) {
+            int ile_kam, ile_musz;
+            cout << "ile kamykow: "; cin >> ile_kam;
+            cout << "ile muszelek: "; cin >> ile_musz;
+            moj.dodaj(ile_kam, ile_musz);
+        }
+        if (wybor == 4) {
+            moj.wyswietl();
+        }
+
+    } while (wybor != 0);
+
+    system("pause");
+    return 0;
+}
