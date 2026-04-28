@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+class kuferek
+{
+public:
+int kamyki, muszelki;
+bool zamkniety;
+
+void wyswietl(){
+if(zamkniety){
+cout << "\nKuferek jest zamkniety\n";
+return;
+}
+cout << "\nW kuferku jest " << kamyki << " kamykow i "
+<< muszelki << " muszelek\n";
+}
+};
+
+int main() {
+
+kuferek moj;
+moj.kamyki = 0;
+moj.muszelki = 0;
+moj.zamkniety = true;
+
+int wybor;
+
+do {
+cout << "\n1-otworz 2-zamknij 3-dodaj 4-wyswietl 0-koniec\n";
+cin >> wybor;
+
+if(wybor == 1){
+moj.zamkniety = false;
+cout << "otwarto\n";
+}
+
+if(wybor == 2){
+moj.zamkniety = true;
+cout << "zamknieto\n";
+}
+
+if(wybor == 3){
+if(moj.zamkniety){
+cout << "zamkniety\n";
+} else {
+moj.kamyki += 1;
+moj.muszelki += 1;
+cout << "dodano\n";
+}
+}
+
+if(wybor == 4){
+moj.wyswietl();
+}
+
+} while(wybor != 0);
+
+system("pause");
+return 0;
+}
