@@ -1,0 +1,155 @@
+#include <iostream>
+using namespace std;
+//--------------------------------------------------------
+class kasa
+{
+private:
+    bool zamknieta;
+
+    int banknot_500, banknot_200, banknot_100, banknot_50, banknot_10;
+
+    int moneta_5_zl, moneta_2_zl, moneta_1_zl;
+
+    int moneta_50_gr, moneta_20_gr, moneta_10_gr, moneta_5_gr, moneta_2_gr, moneta_1_gr;
+
+public:
+    kasa(){
+        zamknieta = true;
+
+        banknot_500 = banknot_200 = banknot_100 = banknot_50 = banknot_10 = 0;
+
+        moneta_5_zl = moneta_2_zl = moneta_1_zl = 0;
+
+        moneta_50_gr = moneta_20_gr = moneta_10_gr = moneta_5_gr = moneta_2_gr = moneta_1_gr = 0;
+    }
+
+    void otworz(){
+        if(!zamknieta) return;
+        zamknieta = false;
+        cout << "\nKasa zostala otwarta!\n";
+    }
+
+    void zamknij(){
+        if(zamknieta) return;
+        zamknieta = true;
+        cout << "\nKasa zostala zamknieta!\n";
+    }
+
+    void dodaj_banknoty(int b500, int b200, int b100, int b50, int b10){
+        if(zamknieta){
+            cout << "Kasa jest zamknieta!\n";
+            return;
+        }
+
+        if(b500>=0) banknot_500 += b500;
+        if(b200>=0) banknot_200 += b200;
+        if(b100>=0) banknot_100 += b100;
+        if(b50>=0)  banknot_50  += b50;
+        if(b10>=0)  banknot_10  += b10;
+    }
+
+    void dodaj_monety_zl(int m5, int m2, int m1){
+        if(zamknieta){
+            cout << "Kasa jest zamknieta!\n";
+            return;
+        }
+
+        if(m5>=0) moneta_5_zl += m5;
+        if(m2>=0) moneta_2_zl += m2;
+        if(m1>=0) moneta_1_zl += m1;
+    }
+
+    void dodaj_monety_gr(int g50, int g20, int g10, int g5, int g2, int g1){
+        if(zamknieta){
+            cout << "Kasa jest zamknieta!\n";
+            return;
+        }
+
+        if(g50>=0) moneta_50_gr += g50;
+        if(g20>=0) moneta_20_gr += g20;
+        if(g10>=0) moneta_10_gr += g10;
+        if(g5>=0)  moneta_5_gr  += g5;
+        if(g2>=0)  moneta_2_gr  += g2;
+        if(g1>=0)  moneta_1_gr  += g1;
+    }
+
+    void wyswietl(){
+        if(zamknieta){
+            cout << "Kasa jest zamknieta - otworz kase!\n";
+            return;
+        }
+
+        cout << "\nW kasie znajduje sie:\n";
+
+        cout << "- banknoty: "
+             << banknot_500 << " po 500 zl, "
+             << banknot_200 << " po 200 zl, "
+             << banknot_100 << " po 100 zl, "
+             << banknot_50  << " po 50 zl, "
+             << banknot_10  << " po 10 zl\n";
+
+        cout << "- monety zl: "
+             << moneta_5_zl << " po 5 zl, "
+             << moneta_2_zl << " po 2 zl, "
+             << moneta_1_zl << " po 1 zl\n";
+
+        cout << "- monety gr: "
+             << moneta_50_gr << " po 50 gr, "
+             << moneta_20_gr << " po 20 gr, "
+             << moneta_10_gr << " po 10 gr, "
+             << moneta_5_gr  << " po 5 gr, "
+             << moneta_2_gr  << " po 2 gr, "
+             << moneta_1_gr  << " po 1 gr\n";
+    }
+
+    void stan(){
+        if(zamknieta){
+            cout << "Stan kasy wynosi: kasa jest zamknieta - otworz kase!\n";
+            return;
+        }
+
+        double suma = 0;
+
+        suma += banknot_500 * 500;
+        suma += banknot_200 * 200;
+        suma += banknot_100 * 100;
+        suma += banknot_50  * 50;
+        suma += banknot_10  * 10;
+
+        suma += moneta_5_zl * 5;
+        suma += moneta_2_zl * 2;
+        suma += moneta_1_zl * 1;
+
+        suma += moneta_50_gr * 0.50;
+        suma += moneta_20_gr * 0.20;
+        suma += moneta_10_gr * 0.10;
+        suma += moneta_5_gr  * 0.05;
+        suma += moneta_2_gr  * 0.02;
+        suma += moneta_1_gr  * 0.01;
+
+        cout << "Stan kasy wynosi: " << suma << " zlotych\n";
+    }
+};
+//--------------------------------------------------------
+int main(){
+
+    kasa k;
+
+    k.otworz();
+
+    k.wyswietl();
+
+    k.dodaj_banknoty(4,5,8,0,6);
+    k.dodaj_monety_zl(2,10,25);
+    k.dodaj_monety_gr(15,12,35,15,0,48);
+
+    k.wyswietl();
+    k.stan();
+
+    k.zamknij();
+
+    k.wyswietl();
+    k.stan();
+
+    return 0;
+}
