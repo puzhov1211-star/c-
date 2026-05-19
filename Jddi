@@ -1,0 +1,59 @@
+#include "balonik.h"
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+//-----------FUNKCJE SKLADOWE - definicje-------------
+
+balonik::balonik(string nowa_nazwa, float wys, float sred) {
+    nazwa = nowa_nazwa;
+    
+    if (wys < 0) wysokosc = 0;
+    else wysokosc = wys;
+    
+    if (sred < 0) srednica = 0;
+    else srednica = sred;
+}
+//----------------------------------------------------
+
+void balonik::zmien_wysokosc(float przyrost) {
+    wysokosc += przyrost;
+    if (wysokosc < 0) wysokosc = 0;
+}
+//----------------------------------------------------
+
+void balonik::wyswietl() {
+    cout << "Tu balonik \"" << nazwa << "\" - mam " << srednica 
+         << " cm srednicy i jestem na wysokosci " << wysokosc << " m" << endl;
+}
+//----------------------------------------------------
+
+float balonik::get_srednica() {
+    return srednica;
+}
+//----------------------------------------------------
+
+void balonik::set_srednica(float nowa_srednica) {
+    if (nowa_srednica >= 0) {
+        srednica = nowa_srednica;
+    }
+}
+
+//---------FUNKCJE GLOBALNE - definicje-------------
+
+void pompuj(balonik &bal, float powietrze) {
+    if (powietrze <= 0) return;
+    
+    float r = bal.get_srednica() / 2.0f;
+    float pole = 3.14159f * r * r;
+    pole += powietrze;
+    
+    float nowa_sred = sqrt(pole / 3.14159f) * 2.0f;
+    bal.set_srednica(nowa_sred);
+}
+//----------------------------------------------------
+
+
+
+
