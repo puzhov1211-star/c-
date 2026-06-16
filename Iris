@@ -1,0 +1,82 @@
+#ifndef LAMPA_H
+#define LAMPA_H
+
+#include <iostream>
+using namespace std;
+
+class pokretlo {
+public:
+    float nastawa;
+    float temperatura;
+};
+
+class bateria {
+public:
+    pokretlo goraca;
+    pokretlo zimna;
+
+    void nastaw(float g, float z);
+    void oblicz();
+};
+
+#endif
+
+
+#include "lampa.h"
+
+void bateria::nastaw(float g, float z) {
+
+    if (g < 0) g = 0;
+    if (g > 100) g = 100;
+
+    if (z < 0) z = 0;
+    if (z > 100) z = 100;
+
+    goraca.nastawa = g;
+    zimna.nastawa = z;
+
+    oblicz();
+}
+
+void bateria::oblicz() {
+
+    float T;
+    float W;
+
+    T = (goraca.nastawa * goraca.temperatura +
+        zimna.nastawa * zimna.temperatura)
+        / (goraca.nastawa + zimna.nastawa);
+
+    W = (goraca.nastawa + zimna.nastawa) / 2;
+
+    cout << "Temperatura wody: " << T << " C" << endl;
+    cout << "Wydatek wody: " << W << "%" << endl;
+}
+
+int main() {
+
+    bateria b;
+
+    b.goraca.temperatura = 55;
+    b.zimna.temperatura = 18;
+
+    float g, z;
+    char wybor;
+
+    do {
+
+        cout << "Podaj goraca wode: ";
+        cin >> g;
+
+        cout << "Podaj zimna wode: ";
+        cin >> z;
+
+        b.nastaw(g, z);
+
+        cout << "Czy chcesz powtorzyc? t/n: ";
+        cin >> wybor;
+
+    } while (wybor == 't');
+
+    return 0;
+}
